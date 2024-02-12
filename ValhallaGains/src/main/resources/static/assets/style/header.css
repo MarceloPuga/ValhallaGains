@@ -1,0 +1,178 @@
+/* style.css */
+
+@import url('https://fonts.googleapis.com/css2?family=Gabarito:wght@600&family=Gloria+Hallelujah&family=Kanit:ital,wght@1,600&family=Lato:wght@900&family=Prompt:wght@600&display=swap');
+/* Button Styles */
+#botones {
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+}
+
+#botones button {
+    margin-bottom: 10px;
+}
+
+/* Navigation Styles */
+
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+}
+
+nav a {
+    color: #fff;
+}
+nav {
+    display: none; /* Oculta la barra de navegación por defecto */
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 10px; /* Ajusta el padding de la barra de navegación */
+    background-color: rgba(0, 0, 0, 0.5);
+    position: fixed; /* Cambiado a fixed para que se quede en la parte superior */
+    top: 0; /* Asegura que la barra de navegación esté en la parte superior */
+    left: 0;
+    width: 100%;
+    z-index: 2;
+    
+}
+
+#botones {
+    width: 100%; /* Ajusta el ancho al 100% para dispositivos móviles */
+    max-width: none; /* Evita el máximo ancho en dispositivos móviles */
+}
+
+/* Mobile Navigation Styles */
+@media (max-width: 767px) {
+    nav {
+        display: none; /* Oculta la barra de navegación por defecto */
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 20px;
+        background-color: rgba(0, 0, 0, 0.5);
+        position: fixed; /* Cambiado a fixed para que se quede en la parte superior */
+        top: 0; /* Asegura que la barra de navegación esté en la parte superior */
+        left: 0;
+        width: 100%;
+        z-index: 2;
+    }
+    #menu {
+        width: 100%;
+        height: auto; /* Cambiado a auto para que se ajuste según el contenido */
+        padding: 10px 0;
+        flex-direction: column;
+        display: flex;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
+        background-color: black;
+    }
+
+    #menu-toggle:checked+#trigger+#burger+#menu {
+        animation: checked-anim 1s ease both;
+        display: flex;
+        flex-direction: column;
+        z-index: 1001;
+    }
+
+    #menu-toggle:checked+#trigger~#menu>li,
+    #menu-toggle:checked+#trigger~#menu>a {
+        display: block;
+        text-align: center;
+        margin: 10px 0;
+    }
+
+    #menu-toggle:not(:checked) ~ #menu > li {
+        display: none; /* Oculta los elementos li cuando el checkbox no está marcado */
+    }
+    #trigger {
+        top: 10px; /* Ajusta la posición desde la parte superior */
+        left: 10px; /* Ajusta la posición desde el lado izquierdo */
+        font-size: 36px; /* Ajusta el tamaño según sea necesario */
+        cursor: pointer;
+        position: fixed; /* Cambiado a fixed para que se quede en la parte superior */
+        z-index: 1;
+        color: #fff;
+    }
+
+    #botones {
+        width: 100%; /* Cambiado a 100% para ocupar el ancho completo */
+        max-width: none; /* Evita el máximo ancho en dispositivos móviles */
+    }
+
+   
+
+    #imagennav {
+        height: 7rem;
+        object-fit: contain;
+        border-radius: 100%;
+        width: 7rem;
+       
+    }
+
+    /* Animación de deslizamiento hacia abajo */
+    @keyframes slideDown {
+        from {
+            opacity: 0;
+            transform: translateY(-2.5px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Ocultar checkbox en la vista de laptop */
+    [type="checkbox"] {
+        display: none;
+    }
+}
+
+/* Mostrar la barra de navegación solo cuando el menú está seleccionado */
+#menu-toggle:checked + #trigger ~ nav {
+    display: flex;
+}
+
+/* Mostrar la barra de navegación solo cuando el menú está seleccionado */
+#menu-toggle:checked + #trigger ~ nav {
+    display: flex;
+}
+#backgroundvideo{
+    background-image: url(../../web/images/joven-ropa-deportiva-clase-ejercicios-gimnasio.jpg);
+    object-fit: contain;
+    object-position: center;
+    width: 100%;
+    height: 100vh; /* o la altura que prefieras */
+  }
+/* Laptop Navigation Styles */
+@media (min-width: 768px) {
+    nav #menu {
+        display: flex;
+        flex-direction: row;
+    }
+
+    #menu-toggle:checked+#menu {
+        display: none;
+    }
+
+    h1 {
+        font-size: 3rem;
+    }
+}
+@media only screen and (min-width:768px) and (max-width:1024px){
+    main{
+        padding-top: 1px;
+    }
+    @media screen and (min-width: 426px) {
+        .logo {
+          display: none !important; 
+        }
+      
+        .logo-collapse.show {
+          display: none !important; 
+        }
+        
+      }
+}

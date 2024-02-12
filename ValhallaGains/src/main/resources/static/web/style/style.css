@@ -1,0 +1,347 @@
+/* style.css */
+
+@import url('https://fonts.googleapis.com/css2?family=Gabarito:wght@600&family=Gloria+Hallelujah&family=Kanit:ital,wght@1,600&family=Lato:wght@900&family=Prompt:wght@600&display=swap');
+
+@keyframes checked-anim {
+    50% {
+        width: 3000px;
+        height: 3000px;
+    }
+
+    100% {
+        width: 100%;
+        height: 100%;
+        border-radius: 0;
+    }
+}
+
+@keyframes not-checked-anim {
+    0% {
+        width: 3000px;
+        height: 3000px;
+    }
+}
+
+/* General Styles */
+html,
+body {
+    margin: 0;
+    padding: 0;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    font-family: 'Gabarito', 'Gloria Hallelujah', 'Kanit', 'Lato', 'Prompt', sans-serif;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+video {
+    width: 100%;
+    height: 200vh; /* Adjust as necessary */
+    object-fit: cover;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+#blackbody::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 105%;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+main form {
+    display: flex;
+    justify-content: space-around; /* Modificado para centrar los formularios */
+    align-items: center;
+    flex-wrap: wrap; /* Permite que los formularios se envuelvan en dispositivos más pequeños */
+}
+#botones {
+    width: 100%; /* Ajusta el ancho al 100% para dispositivos móviles */
+    max-width: none; /* Evita el máximo ancho en dispositivos móviles */
+}
+/* Mobile Navigation Styles */
+@media (max-width: 767px) {
+    body::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+    }
+    video {
+        height: 100%;
+        width: 300%;
+        object-fit: cover;
+    }
+
+    #titulo1 {
+        font-size: 2rem; /* Ajusta el tamaño del título según sea necesario */
+        margin-top: 1rem; /* Ajusta el margen superior */
+    }
+
+    
+
+    .hero-section {
+        padding: var(--spacing-l) var(--spacing-s); /* Ajusta el espaciado según sea necesario */
+    }
+
+    .card-grid {
+        grid-template-columns: repeat(1, 1fr);
+        grid-column-gap: var(--spacing-s);
+        grid-row-gap: var(--spacing-s);
+        max-width: none; /* Elimina el máximo ancho en dispositivos móviles */
+    }
+
+    .card {
+        width: 100%; /* Ajusta el ancho de la tarjeta al 100% */
+    }
+
+
+    #section-icons {
+        height: auto; /* Ajusta la altura al contenido */
+    }
+
+    
+    #section-icons-content {
+        height: auto; /* Ajusta la altura al contenido */
+        padding: 10px;
+        display: flex;
+        flex-direction: column; /* Ajusta el espaciado del contenido según sea necesario*/
+        overflow-y: scroll;
+    }
+
+
+  #section-icons-content h2 {
+    font-size: 10px; /* Ajusta el tamaño del texto según sea necesario */
+}
+
+.divs h2,p{
+    font-size: 20px;
+}
+
+  #background-overlay h2{
+    font-size: 10px;
+  }
+
+  #background-overlay img{
+    height: 70px;
+  }
+  #background-overlay p{
+    font-size: 10px;
+  }
+
+    /* Animación de deslizamiento hacia abajo */
+    @keyframes slideDown {
+        from {
+            opacity: 0;
+            transform: translateY(-2.5px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Ocultar checkbox en la vista de laptop */
+    [type="checkbox"] {
+        display: none;
+    }
+}
+
+
+:root{
+    --background-dark: #2d3548;
+    --text-light: rgba(255,255,255,0.6);
+    --text-lighter: rgba(255,255,255,0.9);
+    --spacing-s: 8px;
+    --spacing-m: 16px;
+    --spacing-l: 24px;
+    --spacing-xl: 32px;
+    --spacing-xxl: 64px;
+    --width-container: 1200px;
+  }
+  
+  *{
+    border: 0;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  html{
+    height: 100%;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+  }
+  
+  body{
+    height: 100%;
+  }
+  
+  .hero-section {
+    align-items: flex-start;
+    background-color: rgb(0, 0, 0);
+    background-size: cover; /* Ajusta el tamaño de la imagen para cubrir completamente el contenedor */
+    background-position: center; /* Centra la imagen dentro del contenedor */
+    display: flex;
+    justify-content: center;
+    min-height: 100%;
+    padding: var(--spacing-xxl) var(--spacing-l);
+  }
+
+  #section-icons {
+    position: relative;
+    background-color: rgb(0, 0, 0);
+    background-size: cover;
+    background-position: center;
+    z-index: 1; /* Asegúrate de que el z-index sea mayor que el del footer */
+    height: 70vh;
+}
+
+  
+  #background-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0, 0, 0);
+    background-size: cover;
+    background-position: center;
+  }
+  
+  #section-icons::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Color de fondo oscuro con opacidad */
+  }
+  
+  /* Contenido del #section-icons */
+  #section-icons-content {
+    display: flex;
+    justify-content: space-around;
+    z-index: 1; /* Asegura que el contenido esté encima del fondo */
+    color: white; /* Ajusta el color del texto según sea necesario */
+    padding: 20px;
+    height: 80vh;
+    width: 100%; /* Ajusta el espaciado del contenido según sea necesario */
+  }
+  
+  /* Añade estilos adicionales para el contenido, como alineación, tamaño de fuente, etc. */
+  #section-icons-content h2 {
+    font-size: 20px;
+  }
+  
+  #section-icons-content p {
+    font-size: 12px;
+  }
+  
+  
+  .card-grid{
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-column-gap: var(--spacing-l);
+    grid-row-gap: var(--spacing-l);
+    max-width: var(--width-container);
+    width: 100%;
+  }
+  
+  @media(min-width: 540px){
+    .card-grid{
+      grid-template-columns: repeat(2, 1fr); 
+    }
+  }
+  
+  @media(min-width: 960px){
+    .card-grid{
+      grid-template-columns: repeat(4, 1fr); 
+    }
+  }
+  
+  .card{
+    list-style: none;
+    position: relative;
+  }
+  
+  .card:before{
+    content: '';
+    display: block;
+    padding-bottom: 150%;
+    width: 100%;
+  }
+  
+  .card__background{
+    background-size: cover;
+    background-position: center;
+    border-radius: var(--spacing-l);
+    bottom: 0;
+    filter: brightness(0.75) saturate(1.2) contrast(0.85);
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transform-origin: center;
+    transform: scale(1) translateZ(0);
+    transition: 
+      filter 200ms linear,
+      transform 200ms linear;
+  }
+  
+  .card:hover .card__background{
+    transform: scale(1.05) translateZ(0);
+  }
+  
+  .card-grid:hover > .card:not(:hover) .card__background{
+    filter: brightness(0.5) saturate(0) contrast(1.2) blur(20px);
+  }
+  
+  .card__content{
+    left: 0;
+    padding: var(--spacing-l);
+    position: absolute;
+    top: 0;
+  }
+  
+  .card__category{
+    color: var(--text-light);
+    font-size: 0.9rem;
+    margin-bottom: var(--spacing-s);
+    text-transform: uppercase;
+  }
+  
+  .card__heading{
+    color: var(--text-lighter);
+    font-size: 1.9rem;
+    text-shadow: 2px 2px 20px rgba(0,0,0,0.2);
+    line-height: 1.4;
+    word-spacing: 100vw;
+  }
+
+  .divwithimage {
+    position: relative;
+    width: 100%;
+    background-image: url(../images/vista-superior-equipo-gimnasio-espacio-copia.jpg);
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.3s, opacity 0.3s;
+  }
+  
+  .divwithimage:hover {
+    transform: scale(1.1); /* Ajusta el valor según el zoom deseado */
+    opacity: 0.8; /* Ajusta el valor de opacidad deseado (0 a 1) */
+  }
+

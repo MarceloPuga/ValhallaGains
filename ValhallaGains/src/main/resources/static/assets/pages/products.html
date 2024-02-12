@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../style/products.css">
+    <link rel="stylesheet" href="../style/header.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="shortcut icon" href="../images/logo.png" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,200&family=Roboto:ital@1&family=Yanone+Kaffeesatz&display=swap"
+        rel="stylesheet">
+    <title>Products</title>
+</head>
+
+<body>
+    <div id="app">
+        <header class=" bg-orange-500 w-screen">
+            <nav class="bg-black  text-white shadow-2xl shadow-black flex items-center justify-between ">
+                <input type="checkbox" class="hidden" id="menu-toggle" />
+                <label class="md:hidden lg:hidden xl:hidden " id="trigger" for="menu-toggle">≡</label>
+                <label id="burger" for="menu-toggle"></label>
+                <!-- Lista única -->
+                <ul id="menu" class="menu justify-between items-center text-3xl space-x-5 text-white ">
+                    <h1 class="sm:text-xl text-3xl font-semibold font-serif lg:mr-[100px]">ValhallaGains</h1>
+                    <li class="flex ">
+                        <!--  <img id="imagennav" src="../images/logo.png" class="logo rounded-full w-[100px] h-[100px]" alt=""> -->
+                    </li>
+                    <li><a href="../../web/index.html" class="hover:text-orange-500 font-serif">• Home</a></li>
+                    <li><a href="#" class="text-orange-500 font-serif">• Product</a></li>
+                    <li><a href="../../web/about.html" class="hover:text-orange-500 font-serif">• About us</a></li>
+                    <li><a href="../../web/contact.html" class="hover:text-orange-500 font-serif">• Contact</a></li>
+                    <li><a href="../../training/training.html" class="hover:text-orange-500 font-serif">• Training</a></li>
+                    <div class="flex h-[50px] w-[150px] gap-6  items-center justify-center">
+                        <a href="../../web/loginregister.html"><img class="h-[30px] w-[30px] object-contain"
+                                src="../images/usuario.png" alt="Login" /></a>
+                        <a class="flex" href="../pages/cartShop.html">
+                            <img class="h-[30px] w-[30px] object-contain" src="../images/carrito-de-compras.png"
+                                alt="cartShop" />
+                            <i class="fas fa-shopping-cart">
+                                <span
+                                    class="bg-[#FF0000] text-xs text-white rounded-full px-1 absolute bottom+2 right+3"
+                                    id="cont">0</span>
+                            </i>
+                        </a>
+                        <li v-on:click="logout()"><button><img class="w-8 h-8" src="../images/cerrar-sesion1.png" alt=""></button></li>
+                    </div>
+                </ul>
+            </nav>
+        </header>
+        <main class="flex flex-col items-center justify-start min-h-screen">
+            <div class="bg-gray-700">
+                <div class="relative flex w-screen items-center justify-center">
+                    <img class="object-cover w-full h-[80vh]" src="../images/banner1.webp" alt="">
+                </div>
+                <h2
+                    class="absolute top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-6xl font-bold font-roboto">
+                    KNOW OUR STORE!
+                </h2>
+                    
+            </div>
+            <div class="flex flex-col mt-5 gap-2 m-4">
+                <div class="flex justify-center items-center gap-1">
+                    <label for="search" class="block text-white font-yanone">Serch:</label>
+                    <input type="text" v-model="search" @input="filterProducts" id="search" name="search"
+                        class="border rounded-md p-1 mt-1 " placeholder="Find products...">
+                </div>
+                <div>
+                    <div class="flex flex-col">
+                        <label for="category" class="block text-white font-yanone">Category:</label>
+                        <select v-model="select" @change="filterProducts" id="category" name="category"
+                            class="border rounded-md p-1 mt-1 ">
+                            <option value="all">all categories</option>
+                            <option v-for="category in categories" :key="category" :value="category">{{ category }}
+                            </option>
+                        </select>
+
+                    </div>
+                    <div class="flex flex-col">
+                        <label class="text-white font-yanone" for="sort">Order by price:</label>
+                        <select v-model="sort" @change="filterProducts" class="border rounded-md p-1 mt-1 ">
+                            <option value="none">None</option>
+                            <option value="asc">lowest to highest </option>
+                            <option value="desc">highest to lowest</option>
+                        </select>
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="flex flex-wrap items-center justify-center gap-6 m-10 scale-100 ">
+                <template v-if="filteredProducts.length > 0">
+                    <div v-for="product in filteredProducts" :key="product.id"
+                        class="flex flex-col gap-1 bg-neutral-200  p-5 hover:scale-110 transition duration-500 cursor-pointer">
+                        <img class="h-[200px] w-[200px]" :src="product.imageURL" alt="">
+                        <h2 class="font-yanone text-xl text-black underline">{{product.name}}</h2>
+                        <h2 class="font-roboto">Price: <span
+                                class="text-black font-bold">{{money(product.price)}}</span></h2>
+                        <h2 class="font-roboto">Stock: {{product.stock}} <span v-if="product.stock === 1"
+                                class="text-red-500 changeColor">¡Last Unit!</span></h2>
+
+                        <div class="flex justify-between">
+                            <button @click="addToCartShop(product)"
+                                class="overlay bg-orange-500 p-1 shadow-md shadow-gray-400 rounded-md hover:scale-110 transition-600">
+                                <img class="h-[30px] w-[30px]" src="../images/carrito-de-compras.png" alt="">
+                            </button>
+                            <a class="p-1 rounded-md hover:scale-110 transition-600 font-roboto text-orange-400 hover:text-orange-600"
+                                @click.prevent="mostrarModal(product)" href="#">View details</a>
+                        </div>
+                    </div>
+
+                </template>
+                <template v-if="showModal">
+
+                    <div class="flex flex-wrap items-center justify-center gap-1 modal-content h-[70vh] w-[70vw] bg-black text-white md:h-[80vh] md:w-[30vw] md:items-center">
+                        <button class="close bg-orange-500 hover:bg-orange-700 px-2" @click="cerrarModal()">x</button>
+                        <div class="flex mt-3 items-center justify-center">
+                            <div>
+                                <img class="w-[20vw] h-[20vh] object-contain" :src="product.imageURL" alt="">
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-center flex-col  md:justify-start">
+                            <h3 class="font-yanone text-4xl md:text-6xl">{{product.name}}</h3>
+                            <h2 class="font-roboto mt-2 ">Price: <span class="text-white font-bold  text-2xl">{{money(product.price)}}</span></h2>
+                            <h2 class="font-roboto mt-2 ">Stock: {{product.stock}} <span v-if="product.stock === 1" class="text-red-500 changeColor">¡Last Unit!</span></h2>
+                            <h2 class="text-white font-roboto mt-2 ">Description:</h2>
+                            <p class="w-full md:w-[30vw] p-5 font-nunito ">{{product.description}}</p>
+                        </div>
+                        <div class="mt-4 md:mt-0 ">
+                            <div class="flex justify-end items-end">
+                                <button @click="addToCartShop(product)" class="bg-orange-500 hover:bg-orange-700 p-2 font-roboto">Add to cart</button>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </template>
+
+
+
+
+            </div>
+    </div>
+
+
+
+    </main>
+    <footer>
+        <div class="w-screen-xl p-4 py-6 lg:py-8 bg-black">
+            <div class="md:flex md:justify-between">
+                <div class="flex items-center mb-6 md:mb-0">
+                    <img src="../images/logo.png" class="h-12 w-12 rounded-lg me-3" alt="Logo" />
+                    <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Valhalla
+                        Gains</span>
+                </div>
+                <div class="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
+                    <div>
+                        <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Resources
+                        </h2>
+                        <ul class="text-gray-500 dark:text-gray-400 font-medium">
+                            <li class="mb-4">
+                                <a href="#" class="hover:underline">Vue Js</a>
+                            </li>
+                            <li>
+                                <a href="https://tailwindcss.com/" class="hover:underline">Tailwind CSS</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Follow us
+                        </h2>
+                        <ul class="text-gray-500 dark:text-gray-400 font-medium">
+                            <li class="mb-4">
+                                <a href="https://github.com/themesberg/flowbite" class="hover:underline ">Github</a>
+                            </li>
+                            <li>
+                                <a href="https://discord.gg/4eeurUVvTy" class="hover:underline">Discord</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Legal</h2>
+                        <ul class="text-gray-500 dark:text-gray-400 font-medium">
+                            <li class="mb-4">
+                                <a href="#" class="hover:underline">Privacy Policy</a>
+                            </li>
+                            <li>
+                                <a href="#" class="hover:underline">Terms &amp; Conditions</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <hr class="bg-black my-6 border-gray-200 sm:mx-auto dark:border-orange-600 lg:my-8" />
+            <div class=" sm:flex sm:items-center sm:justify-between">
+                <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400 font-roboto">© 2023 VALHALLA GAINS.
+                    All Rights
+                    Reserved.
+                </span>
+                <div class="flex mt-4 sm:justify-center sm:mt-0">
+                    <a href="#" class="text-gray-500 hover:text-gray-900 dark:hover:text-white">
+                        <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                            viewBox="0 0 8 19">
+                            <path fill-rule="evenodd"
+                                d="M6.135 3H8V0H6.135a4.147 4.147 0 0 0-4.142 4.142V6H0v3h2v9.938h3V9h2.021l.592-3H5V3.591A.6.6 0 0 1 5.592 3h.543Z"
+                                clip-rule="evenodd" />
+                        </svg>
+                        <span class="sr-only">Facebook page</span>
+                    </a>
+                    <a href="#" class="text-gray-500 hover:text-gray-900 dark:hover:text-white ms-5">
+                        <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                            viewBox="0 0 21 16">
+                            <path
+                                d="M16.942 1.556a16.3 16.3 0 0 0-4.126-1.3 12.04 12.04 0 0 0-.529 1.1 15.175 15.175 0 0 0-4.573 0 11.585 11.585 0 0 0-.535-1.1 16.274 16.274 0 0 0-4.129 1.3A17.392 17.392 0 0 0 .182 13.218a15.785 15.785 0 0 0 4.963 2.521c.41-.564.773-1.16 1.084-1.785a10.63 10.63 0 0 1-1.706-.83c.143-.106.283-.217.418-.33a11.664 11.664 0 0 0 10.118 0c.137.113.277.224.418.33-.544.328-1.116.606-1.71.832a12.52 12.52 0 0 0 1.084 1.785 16.46 16.46 0 0 0 5.064-2.595 17.286 17.286 0 0 0-2.973-11.59ZM6.678 10.813a1.941 1.941 0 0 1-1.8-2.045 1.93 1.93 0 0 1 1.8-2.047 1.919 1.919 0 0 1 1.8 2.047 1.93 1.93 0 0 1-1.8 2.045Zm6.644 0a1.94 1.94 0 0 1-1.8-2.045 1.93 1.93 0 0 1 1.8-2.047 1.918 1.918 0 0 1 1.8 2.047 1.93 1.93 0 0 1-1.8 2.045Z" />
+                        </svg>
+                        <span class="sr-only">Discord community</span>
+                    </a>
+                    <a href="#" class="text-gray-500 hover:text-gray-900 dark:hover:text-white ms-5">
+                        <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                            viewBox="0 0 20 17">
+                            <path fill-rule="evenodd"
+                                d="M20 1.892a8.178 8.178 0 0 1-2.355.635 4.074 4.074 0 0 0 1.8-2.235 8.344 8.344 0 0 1-2.605.98A4.13 4.13 0 0 0 13.85 0a4.068 4.068 0 0 0-4.1 4.038 4 4 0 0 0 .105.919A11.705 11.705 0 0 1 1.4.734a4.006 4.006 0 0 0 1.268 5.392 4.165 4.165 0 0 1-1.859-.5v.05A4.057 4.057 0 0 0 4.1 9.635a4.19 4.19 0 0 1-1.856.07 4.108 4.108 0 0 0 3.831 2.807A8.36 8.36 0 0 1 0 14.184 11.732 11.732 0 0 0 6.291 16 11.502 11.502 0 0 0 17.964 4.5c0-.177 0-.35-.012-.523A8.143 8.143 0 0 0 20 1.892Z"
+                                clip-rule="evenodd" />
+                        </svg>
+                        <span class="sr-only">Twitter page</span>
+                    </a>
+                    <a href="#" class="text-gray-500 hover:text-gray-900 dark:hover:text-white ms-5">
+                        <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                            viewBox="0 0 20 20">
+                            <path fill-rule="evenodd"
+                                d="M10 .333A9.911 9.911 0 0 0 6.866 19.65c.5.092.678-.215.678-.477 0-.237-.01-1.017-.014-1.845-2.757.6-3.338-1.169-3.338-1.169a2.627 2.627 0 0 0-1.1-1.451c-.9-.615.07-.6.07-.6a2.084 2.084 0 0 1 1.518 1.021 2.11 2.11 0 0 0 2.884.823c.044-.503.268-.973.63-1.325-2.2-.25-4.516-1.1-4.516-4.9A3.832 3.832 0 0 1 4.7 7.068a3.56 3.56 0 0 1 .095-2.623s.832-.266 2.726 1.016a9.409 9.409 0 0 1 4.962 0c1.89-1.282 2.717-1.016 2.717-1.016.366.83.402 1.768.1 2.623a3.827 3.827 0 0 1 1.02 2.659c0 3.807-2.319 4.644-4.525 4.889a2.366 2.366 0 0 1 .673 1.834c0 1.326-.012 2.394-.012 2.72 0 .263.18.572.681.475A9.911 9.911 0 0 0 10 .333Z"
+                                clip-rule="evenodd" />
+                        </svg>
+                        <span class="sr-only">GitHub account</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    </div>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="../tailwind.config.js"></script>
+    <script src="../js/products.js"></script>
+
+</body>
+
+</html>

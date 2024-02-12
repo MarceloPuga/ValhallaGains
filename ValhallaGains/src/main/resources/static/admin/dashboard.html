@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body class="font-sans bg-gray-100 flex flex-col min-h-screen">
+
+    <!-- Navbar -->
+    <nav class="bg-blue-500 p-4 text-white">
+        <div class="flex justify-between items-center">
+            <h1 class="text-2xl font-semibold">Admin Dashboard</h1>
+            <div class="flex space-x-4">
+                <a href="sendEmail.html" class="hover:text-gray-300">Send Email</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="flex flex-1">
+
+        <!-- Sidebar -->
+        <aside class="w-64 md:w-1/4 lg:w-1/5 xl:w-1/6 bg-blue-500 p-4 text-white">
+            <ul>
+                <li class="mb-2"><a href="#" class="hover:text-gray-300">Dashboard</a></li>
+                <li class="mb-2"><a href="#" class="hover:text-gray-300">Users</a></li>
+                <li class="mb-2"><a href="#" class="hover:text-gray-300">Settings</a></li>
+                <!-- Add more sidebar links as needed -->
+            </ul>
+        </aside>
+
+        <!-- Content Area -->
+        <main class="flex-1 p-8">
+            <h1 class="text-3xl font-semibold mb-8">Welcome to the Admin Dashboard</h1>
+
+            <!-- Client Count -->
+            <div class="bg-white p-6 rounded-lg shadow-md mb-4">
+                <h2 class="text-xl font-semibold mb-4">Total Clients</h2>
+                <p class="text-gray-600" id="clientCount">Loading...</p>
+            </div>
+
+            <!-- Product Count -->
+            <div class="bg-white p-6 rounded-lg shadow-md mb-4">
+                <h2 class="text-xl font-semibold mb-4">Total Products</h2>
+                <p class="text-gray-600" id="productCount">Loading...</p>
+            </div>
+
+            <!-- Category Count -->
+            <div class="bg-white p-6 rounded-lg shadow-md mb-4">
+                <h2 class="text-xl font-semibold mb-4">Total Categories</h2>
+                <p class="text-gray-600" id="categoryCount">Loading...</p>
+            </div>
+
+            <!-- Button to Navigate to Clients View -->
+            <a href="clients.html" class="bg-blue-500 text-white px-4 py-2 rounded-md mb-4 inline-block">Show
+                Clients</a>
+
+            <!-- Button to Navigate to Products View -->
+            <a href="products.html" class="bg-green-500 text-white px-4 py-2 rounded-md mb-4 inline-block">Show
+                Products</a>
+
+            <!-- Button to Navigate to Categories View -->
+            <a href="categories.html" class="bg-yellow-500 text-white px-4 py-2 rounded-md mb-4 inline-block">Show
+                Categories</a>
+
+            <!-- Sample Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                <!-- Add more cards or content as needed -->
+            </div>
+        </main>
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-300 p-4 text-center">
+        <p class="text-gray-700">© 2024 Admin Dashboard. All rights reserved.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Fetch client count from the API
+            fetch('/api/client/count')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('clientCount').innerText = `Total Clients: ${data}`;
+                })
+                .catch(error => {
+                    console.error('Error fetching client count:', error);
+                });
+
+            // Fetch product count from the API
+            fetch('/api/product/count')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('productCount').innerText = `Total Products: ${data}`;
+                })
+                .catch(error => {
+                    console.error('Error fetching product count:', error);
+                });
+
+            // Fetch category count from the API
+            fetch('/api/category/count')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('categoryCount').innerText = `Total Categories: ${data}`;
+                })
+                .catch(error => {
+                    console.error('Error fetching category count:', error);
+                });
+        });
+    </script>
+</body>
+
+</html>

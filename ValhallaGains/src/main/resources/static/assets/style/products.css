@@ -1,0 +1,76 @@
+@keyframes change-color {
+  25% {
+    color: #ff3300;
+  }
+
+  50% {
+    color: #ffffff;
+  }
+
+  75% {
+    color: #ff3300;
+  }
+}
+
+.changeColor {
+  animation-name: change-color;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+}
+
+.font-nunito {
+  font-family: 'Nunito Sans', sans-serif;
+}
+
+.font-roboto {
+  font-family: 'Roboto', sans-serif;
+}
+
+.font-yanone {
+  font-family: 'Yanone Kaffeesatz', sans-serif;
+}
+
+.modal-content {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  /* Ajusta el ancho según tus necesidades */
+  padding: 20px;
+  background-color: #fff;
+  z-index: 9999;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+
+.blur-background {
+  pointer-events: none;
+  user-select: none;
+  filter: blur(5px); /* Ajusta la cantidad de desenfoque según tu preferencia */
+  ; /* Agrega una transición suave al desenfoque */
+}
+.no-blur {
+  filter: none;
+}
+
+ .navbar {
+  height: 120px;
+  background-color: black;
+  display: flex;
+  border-radius: 0px;
+  width: 375px;
+}
+
+
+body {
+  color: #555;
+  background: #222;
+  text-align: center;
+}
