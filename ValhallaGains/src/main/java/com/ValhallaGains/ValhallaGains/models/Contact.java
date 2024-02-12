@@ -1,9 +1,6 @@
 package com.ValhallaGains.ValhallaGains.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class Contact {
@@ -12,6 +9,8 @@ public class Contact {
     public Long id;
     public String comment;
     public String from;
+    @OneToOne
+    public Client client;
 
     public Contact(String comment, String from){
         this.comment = comment;
@@ -39,5 +38,13 @@ public class Contact {
 
     public void setFrom(String from) {
         this.from = from;
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
     }
 }

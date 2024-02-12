@@ -17,6 +17,8 @@ public class Client {
     private Direction directions;
     private String role = "client";
     private String accessCode;
+    @OneToOne(mappedBy = "client")
+    private Contact contact;
     private Trainingtype type=Trainingtype.NONE;
 
     public Client() {
@@ -109,5 +111,11 @@ public class Client {
         purchases.add(purchase);
     }
 
+    public Contact getContact() {
+        return contact;
+    }
 
+    public void setContact(Contact contact) {
+        this.contact = contact;
+    }
 }
