@@ -6,9 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <link rel="stylesheet" href="./header.css">
-    <link rel="stylesheet" href="./styleTraining.css">
-    <link rel="shortcut icon" href="./images/logo2.png" type="image/x-icon">
+    <link rel="stylesheet" href="../style/header.css">
+    <link rel="stylesheet" href="../style/styleTraining.css">
+    <link rel="shortcut icon" href="../images/logo2.png" type="image/x-icon">
     <title>training</title>
 </head>
 
@@ -23,16 +23,16 @@
             <!-- Lista única -->
             <ul id="menu" class="menu items-center text-3xl space-x-5 text-white p-5">
                 <li>
-                    <img id="imagennav" src="./images/logo2.png" class="rounded-full w-[100px] h-[100px]" alt="">
+                    <img id="imagennav" src="../images/logo2.png" class="rounded-full w-[100px] h-[100px]" alt="">
                 </li>
-                <li><a href="http://localhost:8080/web/index.html" class="hover:text-orange-500 font-serif">• Home</a></li>
-                <li><a href="../assets/pages/products.html" class="hover:text-orange-500 font-serif">• Product</a></li>
-                <li><a href="../web/about.html" class="hover:text-orange-500 font-serif">• About us</a></li>
-                <li><a href="../web/contact.html" class="hover:text-orange-500 font-serif">• Contact</a></li>
+                <li><a href="../pages/index.html" class="hover:text-orange-500 font-serif">• Home</a></li>
+                <li><a href="../pages/products.html" class="hover:text-orange-500 font-serif">• Product</a></li>
+                <li><a href="../pages/about.html" class="hover:text-orange-500 font-serif">• About us</a></li>
+                <li><a href="../pages/contact.html" class="hover:text-orange-500 font-serif">• Contact</a></li>
                 <li><a href="#" class="text-orange-500 font-serif">• Training</a></li>
                 <li><a href="../../web/loginregister.html"><img class="h-[30px] w-[30px] object-contain"
-                    src="../assets/images/usuario.png" alt="Login" /></a></li>
-                    <li v-on:click="logout()"><button><img class="w-8 h-8" src="../training/images/logout_3889524.png" alt=""></button></li>
+                    src="../images/usuario.png" alt="Login" /></a></li>
+                    <li v-on:click="logout()"><button><img class="w-8 h-8" src="../images/cerrar-sesion1.png" alt=""></button></li>
             </ul>
         </nav>
     </header>
@@ -40,7 +40,7 @@
         
             <div class="flex-row gap-2">
                 <div class="flip flip-vertical">
-                    <div class="front" style="background-image: url(images/ejercicioAerobico.jpg)">
+                    <div class="front" style="background-image: url(../images/entrenamientoAerobico.jpg)">
                         <h1 class="text-shadow text-orange-500 font-extrabold 
                         text-3xl absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 backdrop-blur-sm px-1 rounded-lg"
                         >AEROBIC</hi>
@@ -54,7 +54,7 @@
                     </div>
                 </div>
                 <div class="flip flip-vertical">
-                    <div class="front" style="background-image: url(images/entrenamientoFuncional.jpg)">
+                    <div class="front" style="background-image: url(../images/entrenamientoFuncional.jpg)">
                         <h1 class="text-shadow text-orange-500 font-extrabold 
                         text-3xl absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 
                         backdrop-blur-sm px-1 rounded-lg">FUNTIONAL</hi>
@@ -69,7 +69,7 @@
                     </div>
                 </div>
                 <div class="flip flip-vertical">
-                    <div class="front" style="background-image: url(images/entrenamientoAnaerobico.jpg)">
+                    <div class="front" style="background-image: url(../images/entrenamientoAnaerobico.jpg)">
                         <h1 class="text-shadow text-orange-500 font-extrabold 
                         text-3xl absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 backdrop-blur-lg p-1">ANAEROBIC</hi>
                     </div>
@@ -84,7 +84,7 @@
             </div>
             <div class="flex-row ">
                 <div class="flip flip-vertical">
-                    <div class="front" style="background-image: url(images/entrenamiento-HIIT.jpg)">
+                    <div class="front" style="background-image: url(../images/entrenamiento-HIIT.jpg)">
                         <h1 class="text-shadow text-orange-500 font-extrabold 
                         text-3xl absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2
                          backdrop-blur-sm px-1 rounded-lg">HIIT</hi>
@@ -98,7 +98,7 @@
                     </div>
                 </div>
                 <div class="flip flip-vertical">
-                    <div class="front" style="background-image: url(images/entrenamientoDePotencia.jpg)">
+                    <div class="front" style="background-image: url(../images/entrenamientoDePotencia.jpg)">
                         <h1 class="text-shadow text-orange-500 font-extrabold 
                         text-3xl absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2
                         backdrop-blur-sm px-1 rounded-lg">POWER</hi>
@@ -118,7 +118,7 @@
         <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
             <div class="md:flex md:justify-between">
                 <div class="flex items-center mb-6 md:mb-0">
-                    <img src="./images/logo2.png" class="h-12 w-12 rounded-lg me-3" alt="Logo" />
+                    <img src="../images/logo2.png" class="h-12 w-12 rounded-lg me-3" alt="Logo" />
                     <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Valhalla
                         Gains</span>
                 </div>
@@ -207,8 +207,8 @@
     </footer>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="./training.js"></script>
-    <script type="module" src="./tailwind.config.js"></script>
+    <script src="../js/training.js"></script>
+    <script type="module" src="/tailwind.config.js"></script>
 </body>
 
 </html>
