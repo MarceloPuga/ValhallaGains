@@ -60,14 +60,14 @@ public class ClientController {
         newClient.setEmail(newClientDTO.email());
         newClient.setPassword(passwordEncoder.encode(newClientDTO.password()));
         newClient.setLastName(newClientDTO.lastName());
-        Direction direction = new Direction();
-        direction.setStreet(newClientDTO.street());
-        direction.setPostalCode(newClientDTO.postalCode());
-        direction.setNeighborhood(newClientDTO.neighborhood());
-        direction.setCounty(newClientDTO.county());
-        direction.setHouseNumber(newClientDTO.houseNumber());
-        direction.setCity(newClientDTO.city());
-        direction.setClient(newClient);
+//        Direction direction = new Direction();
+//        direction.setStreet(newClientDTO.street());
+//        direction.setPostalCode(newClientDTO.postalCode());
+//        direction.setNeighborhood(newClientDTO.neighborhood());
+//        direction.setCounty(newClientDTO.county());
+//        direction.setHouseNumber(newClientDTO.houseNumber());
+//        direction.setCity(newClientDTO.city());
+//        direction.setClient(newClient);
         //ASIGNO CLIENTE A DIRECCION
 
         String accessCode;
@@ -75,9 +75,13 @@ public class ClientController {
             accessCode = valueOf(getRandomNumber(00000000,99999999));
         }while (clientRepository.existsByaccessCode(accessCode));
         newClient.setAccessCode(accessCode);
+/*
         newClient.setDirections(direction);
+*/
         clientRepository.save(newClient);
+/*
         directionRepository.save(direction);
+*/
 
         emailService.sendWelcome(newClient.getEmail(), accessCode);
 

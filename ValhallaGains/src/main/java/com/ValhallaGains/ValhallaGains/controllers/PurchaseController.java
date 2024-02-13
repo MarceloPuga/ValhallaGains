@@ -51,12 +51,12 @@ public class PurchaseController {
 
         // Validar que el cliente exista
         if (client == null) {
-            return new ResponseEntity<>( "You are not authenticated. Log in or register.", HttpStatus.FORBIDDEN);
+            return new ResponseEntity<>("No estás autenticado. Inicia sesión salame", HttpStatus.FORBIDDEN);
         }
 
         // validar ramaño de las listas quantities nombreProductos
         if (newPurchaseDTO.quantities().size() != newPurchaseDTO.nombreProductos().size()) {
-            return new ResponseEntity<>( "The lists (quantities and products) must be of the same size.", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("Las listas(cantidades y productos) deben ser del mismo tamaño", HttpStatus.BAD_REQUEST);
         }
 
         // obtengo la lista de quantities y nombreProductos desde el DTO
@@ -68,6 +68,7 @@ public class PurchaseController {
         Purchase purchaseCreado = new Purchase();
         purchaseCreado.setClient(client);
         purchaseCreado.setTotalAmount(0);
+
         purchaseCreado.setData(LocalDateTime.now());
         String numberOfPurchase;
         do {
@@ -87,10 +88,10 @@ public class PurchaseController {
             Long stockActualizado = stockDelProductoSeleccionado - quantity;
             // SI EL PRODUCTO QUE ME LLEGA DESDE EL FRONT NO EXISTE EN MI BASE DE DATOS DEVUELVO UN ERROR POR SER SALAME
             if (productSeleccionado == null) {
-                return new ResponseEntity<>("PRODUCT DOES NOT EXIST: " + nombreProducto, HttpStatus.BAD_REQUEST);
+                return new ResponseEntity<>("NO EXISTE EL PRODUCTO: " + nombreProducto +" ,SOS SALAME CHE", HttpStatus.BAD_REQUEST);
             }
             if (quantity > stockDelProductoSeleccionado ){
-                return new ResponseEntity<>( "The requested quantity exceeds the available stock of the product."+ productSeleccionado.getName(), HttpStatus.BAD_REQUEST);
+                return new ResponseEntity<>("La cantidad pedida supera el stock disponible del producto " + productSeleccionado.getName(), HttpStatus.BAD_REQUEST);
             }
             productSeleccionado.setStock(stockActualizado);
             productRepository.save(productSeleccionado);
